@@ -1,0 +1,23 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+int main() {
+    ifstream archivo("productos.txt");
+    string nombre, productoMayor;
+    double precio, cantidad, subtotal;
+    double totalGeneral = 0, maxSubtotal = 0;
+    if (!archivo.is_open()) { cout << "Error al abrir el archivo." << endl; return 1; }
+    while (archivo >> nombre >> precio >> cantidad) {
+        subtotal = precio * cantidad;
+        cout << "Producto: " << nombre << " | Precio: $" << precio
+             << " | Cantidad: " << cantidad << " | Subtotal: $" << subtotal << endl;
+        totalGeneral += subtotal;
+        if (subtotal > maxSubtotal) { maxSubtotal = subtotal; productoMayor = nombre; }
+    }
+    cout << "----------------------" << endl;
+    cout << "Total general: $" << totalGeneral << endl;
+    cout << "Producto con mayor subtotal: " << productoMayor << " ($" << maxSubtotal << ")" << endl;
+    archivo.close();
+    return 0;
+}
