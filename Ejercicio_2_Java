@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+public class SistemaProductos {
+    public static void main(String[] args) throws Exception {
+        File archivo = new File("productos.txt");
+        if (!archivo.exists()) { System.out.println("Error: el archivo no existe."); return; }
+        Scanner sc = new Scanner(archivo);
+        double totalGeneral = 0, maxSubtotal = 0;
+        String productoMayor = "";
+        while (sc.hasNext()) {
+            String nombre = sc.next();
+            double precio = sc.nextDouble();
+            double cantidad = sc.nextDouble();
+            double subtotal = precio * cantidad;
+            System.out.println("Producto: " + nombre + " | Precio: $" + precio
+                    + " | Cantidad: " + cantidad + " | Subtotal: $" + subtotal);
+            totalGeneral += subtotal;
+            if (subtotal > maxSubtotal) { maxSubtotal = subtotal; productoMayor = nombre; }
+        }
+        sc.close();
+        System.out.println("----------------------");
+        System.out.println("Total general: $" + totalGeneral);
+        System.out.println("Producto con mayor subtotal: " + productoMayor + " ($" + maxSubtotal + ")");
+    }
+}
