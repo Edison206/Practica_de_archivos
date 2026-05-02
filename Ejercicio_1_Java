@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+public class SistemaNotasArchivo {
+    public static void main(String[] args) throws Exception {
+        File archivo = new File("estudiantes.txt");
+        if (!archivo.exists()) { System.out.println("Error: el archivo no existe."); return; }
+        Scanner sc = new Scanner(archivo);
+        int total = 0, aprobados = 0;
+        double suma = 0;
+        while (sc.hasNext()) {
+            String nombre = sc.next();
+            double n1 = sc.nextDouble(), n2 = sc.nextDouble(), n3 = sc.nextDouble();
+            double promedio = (n1 + n2 + n3) / 3.0;
+            System.out.println("Nombre: " + nombre);
+            System.out.println("Promedio: " + promedio);
+            System.out.println("Estado: " + (promedio >= 7 ? "Aprobado" : "Reprobado"));
+            System.out.println("----------------------");
+            if (promedio >= 7) aprobados++;
+            suma += promedio;
+            total++;
+        }
+        sc.close();
+        System.out.println("Total estudiantes: " + total);
+        System.out.println("Total aprobados: " + aprobados);
+        System.out.println("Promedio general: " + suma / total);
+    }
+} 
